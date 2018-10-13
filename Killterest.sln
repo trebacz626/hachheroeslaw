@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "Killterest", "Killterest.njsproj", "{9AE97566-669B-4BC1-9084-E5A72C9C2FCC}"
+EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "ThumbGenerator", "ThumbGenerator\ThumbGenerator.njsproj", "{1BD9D1DF-38FB-4406-8ED4-0D0C440BA4B7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9AE97566-669B-4BC1-9084-E5A72C9C2FCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AE97566-669B-4BC1-9084-E5A72C9C2FCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AE97566-669B-4BC1-9084-E5A72C9C2FCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AE97566-669B-4BC1-9084-E5A72C9C2FCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BD9D1DF-38FB-4406-8ED4-0D0C440BA4B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BD9D1DF-38FB-4406-8ED4-0D0C440BA4B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BD9D1DF-38FB-4406-8ED4-0D0C440BA4B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BD9D1DF-38FB-4406-8ED4-0D0C440BA4B7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BD2FC33F-55EC-4F4D-8C06-0B9CA716832D}
+	EndGlobalSection
+EndGlobal
