@@ -16,7 +16,7 @@ export interface IUserInstance extends Sequelize.Instance<IUserAttributes>, IUse
 export var model: Sequelize.Model<IUserInstance, IUserAttributes>;
 
 export function setModel(sequelize: Sequelize.Sequelize) {
-  const User: Sequelize.Model<IUserInstance, IUserAttributes> = sequelize.define<IUserInstance, IUserAttributes>('Users', {
+  const User: Sequelize.Model<IUserInstance, IUserAttributes> = sequelize.define<IUserInstance, IUserAttributes>('users', {
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
@@ -41,7 +41,7 @@ export function setModel(sequelize: Sequelize.Sequelize) {
     }
   }, {
       timestamps: false,
-      tableName: 'Users'
+      tableName: 'users'
     });
 
   model = User;

@@ -4,7 +4,13 @@ import sequelizeManager from './sequelizeManager';
 export interface ILawAttributes {
   id?: string,
   email?: string,
-  passwordHash?: string
+  passwordHash?: string,
+  gowId?:number,
+  pdfLink?:string,
+  votesUp?:number,
+  votesDown?:number,
+  usersVote?:boolean,
+  status?:string
 }
 
 
@@ -12,6 +18,13 @@ export interface ILawInstance extends Sequelize.Instance<ILawAttributes>, ILawAt
 }
 
 export var model: Sequelize.Model<ILawInstance, ILawAttributes>;
+
+export const LawStatus={
+  PROJECT:"project",
+  IN_PROCEDURE:"inprogress",
+  VOTED_ACCEPTED:"accepted",
+  VOTED_REFUSED:"refused"
+}
 
 export function setModel(sequelize: Sequelize.Sequelize) {
   const Law: Sequelize.Model<ILawInstance, ILawAttributes> = sequelize.define<ILawInstance, ILawAttributes>('laws', {
@@ -39,6 +52,10 @@ export function setModel(sequelize: Sequelize.Sequelize) {
     votesDown:{
       type:Sequelize.INTEGER,
       defaultValue:0
+    },
+    status:{
+      type:Sequelize.STRING,
+      allowNull:false
     }
   }, {
       timestamps: false,

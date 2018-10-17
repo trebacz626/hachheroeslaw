@@ -2,6 +2,7 @@
 import config from '../../configuration/main'
 import * as User from './User'
 import * as Law from './Law'
+import * as Vote from './Vote'
 import logger from "../../utils/logger/logger";
 
 class SequelizeManager {
@@ -36,6 +37,11 @@ class SequelizeManager {
   setRelations() {
     User.setModel(this._sequelize);
     Law.setModel(this.sequelize);
+    Vote.setModel(this.sequelize);
+    Vote.model.belongsTo(User.model);
+    User.model.hasMany(Vote.model);
+    Vote.model.belongsTo(Law.model);
+    Law.model.hasMany(Vote.model);
   }
 }
 

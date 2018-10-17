@@ -11,6 +11,7 @@ import SequelizeManager from './../db/model/sequelizeManager'
 import authenticateRoutes from './routes/authenticate'
 import userRoutes from './routes/user'
 import lawRoutes from './routes/law'
+import voteRoutes from './routes/vote'
 
 import * as passportSetup from './../utils/passport/auth'
 import * as  bodyParser from 'body-parser'
@@ -79,6 +80,7 @@ class KillterestApp {
     authenticateRoutes(router, passport);
     userRoutes(router);
     lawRoutes(router);
+    voteRoutes(router);
     this.app.use('/api', router);
   }
   async connectDB() {

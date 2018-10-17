@@ -2,7 +2,7 @@
 import sequelizeManager from '../../db/model/sequelizeManager';
 import errorObjectsLevel from '../../utils/errors/errorObjectsLevel';
 import { Authenticator, PassportStatic } from 'passport';
-import { passportNames, isLoggedIn } from '../../utils/passport/auth';
+import { passportNames, isLoggedIn, accessLevels } from '../../utils/passport/auth';
 import { validateRegisterRequest, validateLoginRequest, validateSetName, validateClaimUploader } from '../validators/authenticateValidator';
 import { IUserInstance } from '../../db/model/User';
 import { globalUserService } from '../../db/services/UserService';
@@ -10,6 +10,8 @@ import Name, { NameTypes } from '../../utils/random name generator/Name';
 import errorObjectsUser from '../../utils/errors/errorObjectsUser';
 import errorObjectsUploader from '../../utils/errors/errorObjectsUploader';
 import { processErrors } from '../middlewares';
+import { globalVoteService } from '../../db/services/VoteService';
+import { globalLawService } from '../../db/services/LawService';
 const { validationResult } = require('express-validator/check');
 
 //it just returns user with uploaders
@@ -17,6 +19,15 @@ const getUserById = async function (req: express.Request, res: express.Response,
   
   try {
     res.json(await globalUserService.getUserById(req.params.id));
+  } catch (err) {
+    next(err);
+  }
+}
+
+const getUsersVotes = async function (req: express.Request, res: express.Response, next: express.NextFunction) {
+  
+  try {
+    res.json(await globalLawService.getAllLawsWithUsersVotes(req.user));
   } catch (err) {
     next(err);
   }
@@ -36,6 +47,8 @@ export default function (router: express.Router) {
    * 
    * @apiUse userFromSessionDoesntexists
   */
+  router.get('/user/getmyvotes',isLoggedIn(accessLevels.USER), getUsersVotes);
   router.get('/user/:id', processErrors, getUserById);
+  
   
 }
