@@ -56,6 +56,8 @@ export default {
        }
 }
    * */
-  invalidVideoFormat:new Error("Wrong file format",400)
+  invalidVideoFormat:new Error("Wrong file format",400),
+  
+  invalidId: new Error("invalid id", 400),
 
 }

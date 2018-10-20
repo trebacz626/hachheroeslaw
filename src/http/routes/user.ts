@@ -1,14 +1,12 @@
 ﻿import express = require('express');
 import sequelizeManager from '../../db/model/sequelizeManager';
-import errorObjectsLevel from '../../utils/errors/errorObjectsLevel';
 import { Authenticator, PassportStatic } from 'passport';
 import { passportNames, isLoggedIn, accessLevels } from '../../utils/passport/auth';
-import { validateRegisterRequest, validateLoginRequest, validateSetName, validateClaimUploader } from '../validators/authenticateValidator';
+import { validateGetById } from '../validators/userValidator';
 import { IUserInstance } from '../../db/model/User';
 import { globalUserService } from '../../db/services/UserService';
 import Name, { NameTypes } from '../../utils/random name generator/Name';
 import errorObjectsUser from '../../utils/errors/errorObjectsUser';
-import errorObjectsUploader from '../../utils/errors/errorObjectsUploader';
 import { processErrors } from '../middlewares';
 import { globalVoteService } from '../../db/services/VoteService';
 import { globalLawService } from '../../db/services/LawService';
@@ -18,7 +16,9 @@ const { validationResult } = require('express-validator/check');
 const getUserById = async function (req: express.Request, res: express.Response, next: express.NextFunction) {
   
   try {
-    res.json(await globalUserService.getUserById(req.params.id));
+    let user =await globalUserService.getUserById(req.params.id)
+    user.refreshToken="I isn't so easy";
+    res.json(user);
   } catch (err) {
     next(err);
   }
@@ -48,7 +48,7 @@ export default function (router: express.Router) {
    * @apiUse userFromSessionDoesntexists
   */
   router.get('/user/getmyvotes',isLoggedIn(accessLevels.USER), getUsersVotes);
-  router.get('/user/:id', processErrors, getUserById);
+  router.get('/user/:id',validateGetById(), processErrors, getUserById);
   
   
 }

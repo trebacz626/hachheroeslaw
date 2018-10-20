@@ -112,35 +112,7 @@ export default {
        }
 }
    * */
-  invalidUserName: new Error("Invalid name param", 400),
-  /**
-   * @apiDefine nameAlreadyTaken
-   * @apiError (409) nameAlreadyTaken
-   * 
-   * @apiErrorExample Error-Response:
-   *  HTTP/1.1 409 Conflict
-   *  {
-        "error": {
-          "message": "This name is already taken",
-          "status": 409
-       }
-}
-   * */
-  nameAlreadyTaken: new Error("This name is already taken", 409),
-  /**
-   * @apiDefine invalidUploaderClaimToken
-   * @apiError (400) invalidUploaderClaimToken
-   * 
-   * @apiErrorExample Error-Response:
-   *  HTTP/1.1 400 Bad Requset
-   *  {
-        "error": {
-          "message": ""invalid param token",
-          "status": 400
-       }
-}
-   * */
-  invalidUploaderClaimToken: new Error("invalid param token", 400),
-
+  invalidRefreshToken: new Error("Invalid refresh token", 409),
+  invalidAccessToken: new Error("Invalid access token", 401),
 
 }

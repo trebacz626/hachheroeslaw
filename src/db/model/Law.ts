@@ -3,9 +3,8 @@ import sequelizeManager from './sequelizeManager';
 
 export interface ILawAttributes {
   id?: string,
-  email?: string,
-  passwordHash?: string,
-  gowId?:number,
+  name?:string,
+  govId?:number,
   pdfLink?:string,
   votesUp?:number,
   votesDown?:number,

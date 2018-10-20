@@ -7,7 +7,6 @@ import { IUserInstance } from '../../db/model/User';
 import { globalUserService } from '../../db/services/UserService'
 import * as hasher from '../hasher'
 import errorObjectsUser from '../errors/errorObjectsUser';
-import errorObjectsGlobal from '../errors/errorObjectsGlobal';
 import JWT from '../../utils/passport/JWTPromise'
 import config from '../../configuration/main'
 import * as crypto from 'crypto'
@@ -84,13 +83,13 @@ export const isLoggedIn = function(minAccessLevel){
   return async function (req: express.Request, res: express.Response, next) {
     console.log("is");
     if(req.headers.access_token){
-      try{var data = await JWT.verify((<string>req.headers.access_token));}catch(err){res.json("Invalid accessToken")}
+      try{var data = await JWT.verify((<string>req.headers.access_token));}catch(err){next(errorObjectsUser.invalidAccessToken)}
 
       req.user=await globalUserService.getUserById(<number>data['id']);
       next();
     }else{
       if(minAccessLevel>accessLevels.GUEST)
-        res.json({error:"No access Token"})
+      next(errorObjectsUser.invalidAccessToken)
       else 
         next();
     }

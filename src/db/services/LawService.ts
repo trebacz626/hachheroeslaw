@@ -36,19 +36,19 @@ export default class UserService extends DbService {
     }
     return await LawModel.model.destroy(options);
   }
-  async updateLaw(User: ILawInstance, fields: ILawAttributes) {
+  async updateLaw(law: ILawInstance, fields: ILawAttributes) {
     let options: Sequelize.UpdateOptions = {
-      where: { id: User.id },
+      where: { id: law.id },
       transaction: this.transaction
     }
     return await LawModel.model.update(fields, options);
   }
 
-  async createLaw(User: ILawAttributes) {
+  async createLaw(law: ILawAttributes) {
     let options: Sequelize.CreateOptions = {
       transaction: this.transaction
     }
-    return await LawModel.model.create(User, options);
+    return await LawModel.model.create(law, options);
   }
 
   async getAllLaws(){
@@ -94,6 +94,29 @@ export default class UserService extends DbService {
     }
     return await LawModel.model.findAll(options);
   }
+
+  async bulkCreateLaws(laws: Array<ILawAttributes>) {
+    let options: Sequelize.BulkCreateOptions = {
+      transaction: this.transaction
+    }
+    return await LawModel.model.bulkCreate(laws, options);
+  }
+
+  async bulkUpdateLaws(laws: Array<ILawInstance>) {
+    let options: Sequelize.BulkCreateOptions = {
+      transaction: this.transaction
+    }
+    var requestsToresolve=[];
+        laws.forEach(function(law){
+            requestsToresolve.push((async function(){
+                await law.save();
+            })())
+        })
+        await Promise.all(requestsToresolve);
+    return await LawModel.model.bulkCreate(laws, options);
+  }
+
+
 }
 
 export const globalLawService = new UserService();

@@ -16,19 +16,10 @@ export function validateLoginRequest() {
     body('password').isString().withMessage(errorObjectsUser.invalidUsernameOrPassword)
   ]
 }
-
-export function validateSetName() {
+export function validateRefreshTokenRequest() {
   return [
-    param('name').isString()
-      .custom(function (name) { return name.length <= 32 })
-      .withMessage(errorObjectsUser.invalidUserName)
-  ]
-}
-
-export function validateClaimUploader() {
-  return [
-    param('token').isString()
-      .withMessage(errorObjectsUser.invalidUploaderClaimToken)
+    body('refreshToken').isString().withMessage(errorObjectsUser.invalidRefreshToken),
+    body('password').isString().withMessage(errorObjectsUser.invalidUsernameOrPassword)
   ]
 }
 

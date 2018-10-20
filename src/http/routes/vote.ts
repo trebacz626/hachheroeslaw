@@ -1,6 +1,5 @@
 ﻿import express = require('express');
 import sequelizeManager from '../../db/model/sequelizeManager';
-import errorObjectsLevel from '../../utils/errors/errorObjectsLevel';
 import { Authenticator, PassportStatic } from 'passport';
 import { passportNames, isLoggedIn } from '../../utils/passport/auth';
 import { processErrors } from '../middlewares';

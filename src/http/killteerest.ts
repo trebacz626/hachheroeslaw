@@ -41,7 +41,7 @@ class KillterestApp {
     this.app.use(passport.initialize());
     //setting headers for browser to accept requests
     this.app.use(function (req, res, next) {
-      res.setHeader('Access-Control-Allow-Origin', "http://localhost:1337");
+      res.setHeader('Access-Control-Allow-Origin', "*");
       res.setHeader('Access-Control-Allow-Credentials', 'true');
       res.setHeader('Access-Control-Allow-Methods', "POST,GET,OPTIONS,PUT");
       res.setHeader('Access-Control-Allow-Headers', "content-type");
