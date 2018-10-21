@@ -2,10 +2,11 @@
 import KillterestApp from "./http/killteerest"
 import logger from "./utils/logger/logger";
 import { config } from "winston";
+import { Suplier } from "./services/laws_suplier/suplier";
 
 //CLUSTER SETUP
 
-if (process.env.NODE_ENV === 'prod') {
+if (true/*process.env.NODE_ENV === 'prod'*/) {
   if (cluster.isMaster) {
     console.log("main worker");
     var cpuCount = require('os').cpus().length;
@@ -22,7 +23,8 @@ if (process.env.NODE_ENV === 'prod') {
       console.log("Starting a new worker...");
       cluster.fork();
     });
-
+    var suplier = new Suplier();
+    suplier.start();
     //run custom workers eg. Video uploader,thumb generator etc
 
 
