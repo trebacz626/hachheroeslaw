@@ -5,7 +5,7 @@ import { ILawInstance, ILawAttributes } from "./../../db/model/Law";
 import DbService from "./dbService";
 import { IUserAttributes } from "../model/User";
 
-export default class UserService extends DbService {
+export default class LawService extends DbService {
   setTransaction(transaction: Sequelize.Transaction) {
     this.transaction = transaction;
   }
@@ -119,4 +119,4 @@ export default class UserService extends DbService {
 
 }
 
-export const globalLawService = new UserService();
+export const globalLawService = new LawService();

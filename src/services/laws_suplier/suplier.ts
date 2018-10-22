@@ -28,6 +28,8 @@ export class Suplier{
 
     }    
     async start(){
+        await sequelizeManager.prepare();
+        await sequelizeManager.connect();
         await this.updateLaws();
         setInterval(this.updateLaws,1000*60*60*12);
     }
