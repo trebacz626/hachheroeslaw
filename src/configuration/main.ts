@@ -3,8 +3,8 @@
 let development = {
   killstagramDB: {
     name: "hackheroes",
-    userName: "root",
-    password: "bau3hTbGrKCBmvn6",
+    userName: "apiclient",
+    password: "rBHnyuVfBd",
     host: "localhost"
   },
   passport: {

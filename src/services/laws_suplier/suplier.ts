@@ -15,6 +15,7 @@ async function makeRequest(url:String):Promise<string>{
 }
 
 function compareLaws(one,two){
+       
     return one.status===two.status&&one.pdfLink===two.pdfLink&&one.name===two.name;
 }
 function passLawData(dbLaw,pageLaw){
@@ -35,8 +36,8 @@ export class Suplier{
     }
     async updateLaws(){
         console.log("UPDATING LAWS");
-        var govPageLaws:Array<ILawAttributes> = await this.getLawsFromGovPage();
-        var currentLaws:Array<ILawInstance> = await globalLawService.getAllLaws();
+        var govPageLaws:Array<ILawAttributes> = (await this.getLawsFromGovPage());
+        var currentLaws:Array<ILawInstance> = (await globalLawService.getAllLaws());
         var lawsToUpdate:Array<ILawInstance>=[];
         var lawsToCreate:Array<ILawAttributes>=[];
         var currentLawsByGovId={};
@@ -44,6 +45,7 @@ export class Suplier{
         for(let i=0;i<l;i++){
             currentLawsByGovId[currentLaws[i].govId]=currentLaws[i];
         }
+        
         l = govPageLaws.length;
         for( let i=0;i<l;i++){
             if(currentLawsByGovId[govPageLaws[i].govId]){
@@ -52,7 +54,7 @@ export class Suplier{
                     lawsToUpdate.push(currentLawsByGovId[govPageLaws[i].govId]);
                 }
             }else{
-                console.log("create laws");
+                
                 lawsToCreate.push(govPageLaws[i]);
             }
         }
@@ -74,9 +76,7 @@ export class Suplier{
     }
     async getLawsFromGovPage(){
         var allLawsToUpdate:Array<ILawAttributes>  = parser.parseLawsInVoting(await makeRequest(ALL_LAWS_URL));
-        console.log(allLawsToUpdate.length);
         await this.getPDFLinksForLaws(allLawsToUpdate)
-        console.log(allLawsToUpdate);
         return allLawsToUpdate;
     }
 }

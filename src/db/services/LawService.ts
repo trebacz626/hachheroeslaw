@@ -113,7 +113,6 @@ export default class LawService extends DbService {
             })())
         })
         await Promise.all(requestsToresolve);
-    return await LawModel.model.bulkCreate(laws, options);
   }
 
 
