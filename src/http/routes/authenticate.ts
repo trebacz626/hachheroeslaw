@@ -45,6 +45,7 @@ const getCurrentUser = async function (req: express.Request, res: express.Respon
 const refreshAccessToken = async function (req: express.Request, res: express.Response, next: express.NextFunction) {
   
   try {
+    console.log(req.body);
     var user = await globalUserService.findUserByRefreshToken(req.body.refreshToken);
     if(user ===null)next("User doesn't exist");
     res.json({
@@ -66,7 +67,7 @@ const logOut = async function (req: express.Request, res: express.Response, next
 }
 
 export default function (router: express.Router, passport: PassportStatic) {
-  router.post('/authentication/register', validateRegisterRequest(), processErrors, passport.authenticate(passportNames.LOCAL_SIGN_UP,{ session: false }), register);
+  router.post('/authentication/register',function(req,res,next){console.log(req.body);next();}, validateRegisterRequest(), processErrors, passport.authenticate(passportNames.LOCAL_SIGN_UP,{ session: false }), register);
   router.post('/authentication/login', validateLoginRequest(), processErrors, passport.authenticate(passportNames.LOCAL_LOGIN,{ session: false }), login);
   router.get('/authentication/currentuser', isLoggedIn(accessLevels.USER), getCurrentUser);
 

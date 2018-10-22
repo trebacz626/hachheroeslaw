@@ -52,6 +52,7 @@ export class Suplier{
                     lawsToUpdate.push(currentLawsByGovId[govPageLaws[i].govId]);
                 }
             }else{
+                console.log("create laws");
                 lawsToCreate.push(govPageLaws[i]);
             }
         }

@@ -44,7 +44,7 @@ class KillterestApp {
       res.setHeader('Access-Control-Allow-Origin', "*");
       res.setHeader('Access-Control-Allow-Credentials', 'true');
       res.setHeader('Access-Control-Allow-Methods', "POST,GET,OPTIONS,PUT");
-      res.setHeader('Access-Control-Allow-Headers', "content-type");
+      res.setHeader('Access-Control-Allow-Headers', "content-type,access_token");
       next();
     })
     this.mountRoutes();

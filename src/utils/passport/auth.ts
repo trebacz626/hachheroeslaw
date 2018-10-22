@@ -83,11 +83,13 @@ export const isLoggedIn = function(minAccessLevel){
   return async function (req: express.Request, res: express.Response, next) {
     console.log("is");
     if(req.headers.access_token){
+      console.log("invalid at")
       try{var data = await JWT.verify((<string>req.headers.access_token));}catch(err){next(errorObjectsUser.invalidAccessToken)}
 
       req.user=await globalUserService.getUserById(<number>data['id']);
       next();
     }else{
+      console.log("no at")
       if(minAccessLevel>accessLevels.GUEST)
       next(errorObjectsUser.invalidAccessToken)
       else 
