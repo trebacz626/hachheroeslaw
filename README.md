@@ -1,4 +1,1 @@
-﻿# Killterest
-
-Documentation is in gitlab wiki
-
+﻿# Moj sejm
