@@ -76,8 +76,8 @@ export default class LawService extends DbService {
   async getLawsByPage(pageNum:number,userId?:number,status?:string){
     let options: Sequelize.FindOptions<ILawAttributes> = {
       transaction: this.transaction,
-      offset:(pageNum-1)*100,
-      limit:100,
+      offset:(pageNum-1)*60,
+      limit:60,
       order:[
         ['govId','DESC']
       ]
