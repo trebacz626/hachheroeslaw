@@ -20,6 +20,6 @@
  
  
  link do projektu aplikacji android:  
-
+https://drive.google.com/folderview?id=1T-1W1B94gq7z0-6Ufp1qWXmkM7Hsr2Fn
  
  
