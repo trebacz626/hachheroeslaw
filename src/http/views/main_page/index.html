@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="./bootstrap.min.css">
+    <script src="./bootstrap.min.js"></script>
+    <script src="apiclient.js"></script>
+    <link rel="stylesheet" type="text/css" href="back.css">
+    <script src="log.html.js"></script>
+    <script src="mojsejm.html.js"></script>
+    <script src="coś.html.js"></script>
+    <script src="switch.js"></script>
+    <link href="http://www.sejm.gov.pl/favicon.ico" rel="SHORTCUT ICON">
+</head>
+
+<body>
+    <div data-role="header" data-theme="b" class="header">
+        <h1>Mój sejm</h1>
+    </div>
+
+    <div id="content" class="transparent"></div>
+
+    <div class="fill"></div>
+
+    <footer data-role="footer">
+        <div class="row black">
+            <button class="col" onclick="changepage('logsite')">Moje konto</button>
+            <button class="col" onclick="changepage('mojsejm')">Mój sejm</button>
+        </div>
+    </footer>
+
+    <script src="loaddef.js"></script>
+
+</body>
+
+</html>

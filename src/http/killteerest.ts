@@ -35,7 +35,8 @@ class KillterestApp {
     this.app.use(bodyParser.urlencoded({ extended: true, limit: "500mb", parameterLimit:1000000000 }));
     this.app.use(bodyParser.json({ limit: "500mb"}));
     this.app.use(cookieParser());
-    this.app.use(express.static(path.join(__dirname, 'public')));
+    console.log((path.join(__dirname, 'views','main_page')));
+    this.app.use(express.static(path.join(__dirname, 'views','main_page')));
     this.app.use(morgan('dev'));
     passportSetup.setup(passport);
     this.app.use(passport.initialize());

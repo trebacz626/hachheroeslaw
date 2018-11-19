@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./src/MainApp",
-    "test": "mocha --timeout 10000 ./tests/**/*.spec.ts"
+    "test": "mocha --timeout 10000 ./tests/**/*.spec.ts",
+    "html": "copyfiles src/**/*.html src/**/*.css src/**/*.js src/**/*.png out/"
   },
   "description": "Killterest",
   "author": {
@@ -20,6 +21,7 @@
     "chai-http": "^4.0.0",
     "cheerio": "^1.0.0-rc.2",
     "cookie-parser": "^1.4.3",
+    "copyfiles": "^2.1.0",
     "debug": "2.6.9",
     "express": "4.16.3",
     "express-session": "1.15.6",
