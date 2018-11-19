@@ -3,3 +3,4 @@ auto/
 *.js
 apidoc/
 out/
+!/src/html/views/main_page/*
