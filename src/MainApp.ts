@@ -6,7 +6,7 @@ import { Suplier } from "./services/laws_suplier/suplier";
 
 //CLUSTER SETUP
 
-if (false/*process.env.NODE_ENV === 'prod'*/) {
+if (true/*process.env.NODE_ENV === 'prod'*/) {
   if (cluster.isMaster) {
     console.log("main worker");
     var cpuCount = require('os').cpus().length;
