@@ -1,5 +1,5 @@
 ﻿var logpage = `
-<div id="logsite" style='background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Sejm_RP_logo_and_wordmark.svg/1200px-Sejm_RP_logo_and_wordmark.svg.png") fixed  50% 50% no-repeat; background-size: 90vw; height: 80vh;'>
+<div id="logsite" >
     <form onsubmit="return logIn(this)" id="logblock">
         <div class="container">
 
