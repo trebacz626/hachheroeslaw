@@ -24,13 +24,13 @@ class SejmController {
         for (var i = 0; i < laws.length; i++) {
             currentLaw[i] =
                 `
-                <div class='law' id='law${laws[i].id}'>
+                <div class='law bg-light' id='law${laws[i].id}'>
                     <div class="description-wrapper">
-                     <a href="${laws[i].pdfLink}"><button onclick="" class='btn btn-light  '>${laws[i].name}</button></a>
+                     <a href="${laws[i].pdfLink}"><button  type="button" onclick="" class='btn btn-square btn-light'>${laws[i].name}</button></a>
                     </div>
                     <div class=" btn-group voteBlock">
-                        <button onclick="sejmcontroller.voteForLaw(${laws[i].id},true)" class='btn btn-success'>Za: ${laws[i].votesUp}</button>
-                        <button onclick="sejmcontroller.voteForLaw(${laws[i].id},false)" class='btn btn-danger'>Przeciw: ${laws[i].votesDown}</button>
+                        <button  type="button" onclick="sejmcontroller.voteForLaw(${laws[i].id},true)" class='btn  btn-success btn-square'>Za: ${laws[i].votesUp}</button>
+                        <button  type="button" onclick="sejmcontroller.voteForLaw(${laws[i].id},false)" class='btn btn-square btn-danger'>Przeciw: ${laws[i].votesDown}</button>
                     </div>
                 </div>
                 `;
