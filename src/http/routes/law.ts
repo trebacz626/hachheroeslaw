@@ -66,7 +66,7 @@ const voteForLaw = async function (req: express.Request, res: express.Response, 
       if(vote.isUp)
         law.votesUp+=1;
       else
-        law.votesDown-=1;
+        law.votesDown+=1;
       await law.save();
     }else{
       if(vote.isUp!==isUp){
