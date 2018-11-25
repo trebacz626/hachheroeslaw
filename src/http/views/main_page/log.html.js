@@ -1,31 +1,31 @@
 ﻿var logpage = `
 <div
     <div id="logsite" >
-        <form onsubmit="return logIn(this)" id="logblock">
+        <form onsubmit="authController.logIn(this);return false;" id="logblock">
             <div class="container">
                     <label for='email' name:"email"> <b>E-mail</b></label>
-                    <input type="email" placeholder="Wpisz email" name="uname" id='email' required>
+                    <input type="email" placeholder="Wpisz email" name="email"  required>
 
                     <label for='password' name="password"><b>Hasło</b></label>
-                    <input type="password" placeholder="Wpisz hasło" name="password" id='password' required>
+                    <input type="password" placeholder="Wpisz hasło" name="password"  required>
 
                     <button type="submit" name='login'>Zaloguj się</button>
             </div>
 
         </form>
-        <form onsubmit="return register(this)" id="regblock">
+        <form onsubmit="authController.register(this);return false;" id="regblock">
                 <div class="container">
 
                     <label for='email' name:"email"> <b>E-mail</b></label>
-                    <input type="email" placeholder="Wpisz email" name="uname" id='email' required>
+                    <input type="email" placeholder="Wpisz email" name="email"  required>
 
 
                     <label for='name'> <b>Nazwa użytkownika</b></label>
-                    <input type="name" placeholder="Wpisz nazwę użytkownika" name="name" id='name' required>
+                    <input type="name" placeholder="Wpisz nazwę użytkownika" name="name"  required>
 
 
                     <label for='password' name="password"><b>Hasło</b></label>
-                    <input type="password" placeholder="Wpisz hasło" name="password" id='password' required>
+                    <input type="password" placeholder="Wpisz hasło" name="password"  required>
 
                     <button type="submit" name='register'>Zarejestruj się</button>
                 </div>
@@ -49,13 +49,23 @@ $('#reg').on('click', function(){
 
 `;
 
-function logIn(form)
-    {
-    apiClient.Login(form.email.value, form.password.value)
-    return false;
+
+class AuthController {
+    constructor() {
+        this.template = logpage;
     }
-function register(form)
-    {
-    apiClient.Register(form.email.value, form.name.value, form.password.value)
-    return false;
+    async start() {
     }
+    async register(form)
+    {
+        console.log(form);
+        apiClient.Register(form.email.value, form.name.value, form.password.value)
+        return false;
+    }
+    async logIn(form)
+    {
+        console.log(form);
+        apiClient.Login(form.email.value, form.password.value)
+        return false;
+    }
+}

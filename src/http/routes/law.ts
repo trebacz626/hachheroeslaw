@@ -47,7 +47,8 @@ const getLawsByPageAndStatus = async function (req: express.Request, res: expres
   
   try {
     if(req.user)var id=req.user.id;
-    res.json(await globalLawService.getLawsByPage(req.params.num,id,req.params.status));
+    let laws = await globalLawService.getLawsByPage(req.params.num,id,req.params.status);
+    res.json(laws);
   } catch (err) {
     next(err);
   }
@@ -62,12 +63,14 @@ const voteForLaw = async function (req: express.Request, res: express.Response, 
     if(law===null){next({error:"Law doesn't exist"});return;}
     var vote:IVoteInstance = await globalVoteService.getVote({userId:req.user.id,lawId:req.params.id});
     if(vote===null){
-      vote=await globalVoteService.createVote({userId:req.user.id,lawId:req.params.id,isUp:isUp});
-      if(vote.isUp)
+      vote=await globalVoteService.createVote({userId:req.user.id,lawId:req.params.id,isUp:isUp});if(vote.isUp){
         law.votesUp+=1;
-      else
+      }else{
         law.votesDown+=1;
+      }
       await law.save();
+      
+      
     }else{
       if(vote.isUp!==isUp){
         vote.isUp=isUp;

@@ -16,7 +16,7 @@ dataStorage = new MyDatastorage();
 class Apiclient {
 	constructor() {
 		this.accessToken = "";
-		this.SITE_URL ="http://77.237.31.43:8080"; //"http://77.237.31.43:8080";
+		this.SITE_URL ="http://localhost:8080"; //"http://77.237.31.43:8080";
 	}
 	async getuserById(id) {
 		var result = await this.GetRequest(this.SITE_URL + "api/api/users/" + id);
@@ -33,6 +33,7 @@ class Apiclient {
 		dataStorage.store(user);
 	}
 	async Register(mail, name, password) {
+		console.log("register");
 		var rejestracja = await this.PostRequest(this.SITE_URL + "/api/authentication/register",
 			{
 				email: mail,
@@ -93,7 +94,7 @@ class Apiclient {
 				console.log("error posting");
 			}	
 			if (posting == 401) {
-				if (dataStorage.getRefreshToken === null) {
+				if (dataStorage.getRefreshToken() === null) {
 					return "Nie jesteś zalogowany/zalogowana"
 				}
 				let result = await $.post(this.SITE_URL + "/api/authentication/refreshaccessToken",
