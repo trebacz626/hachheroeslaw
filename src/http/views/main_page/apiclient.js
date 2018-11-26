@@ -16,7 +16,7 @@ dataStorage = new MyDatastorage();
 class Apiclient {
 	constructor() {
 		this.accessToken = "";
-		this.SITE_URL ="http://localhost:8080"; //"http://77.237.31.43:8080";
+		this.SITE_URL ="http://77.237.31.43:8080";//"http://localhost:8080";"
 	}
 	async getuserById(id) {
 		var result = await this.GetRequest(this.SITE_URL + "api/api/users/" + id);
