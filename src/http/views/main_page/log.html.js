@@ -1,5 +1,5 @@
 ﻿var logpage = `
-<div
+<div>
     <div id="logsite" >
         <form onsubmit="authController.logIn(this);return false;" id="logblock">
             <div class="container">
@@ -30,42 +30,63 @@
                     <button type="submit" name='register'>Zarejestruj się</button>
                 </div>
 
-            </form>
+        </form>
+        
+    <button id="log">Logowanie</button>
+    <button id="reg">Rejestracja</button>
+    <script>
+    $('#logblock').show();
+    $('#regblock').hide();
+    $('#log').on('click', function(){
+        $('#logblock').show();
+        $('#regblock').hide();
+    });
+    $('#reg').on('click', function(){
+        $('#logblock').hide();
+        $('#regblock').show();
+    });
+    </script>
     </div>
-<button id="log">Logowanie</button>
-<button id="reg">Rejestracja</button>
-<script>
-$('#logblock').show();
-$('#regblock').hide();
-$('#log').on('click', function(){
-	$('#logblock').show();
-	$('#regblock').hide();
-});
-$('#reg').on('click', function(){
-	$('#logblock').hide();
-	$('#regblock').show();
-});
-</script>
+    <div id="profile">
+        Here goes profile
+        <button onclick="authController.logout()">LOGOUT</button>
+    </div>
+</div>
 
 `;
-
-
 class AuthController {
     constructor() {
         this.template = logpage;
     }
     async start() {
+        await $("#content").html(logpage)
+        if(dataStorage.getRefreshToken()){
+            this.showProfile();
+            
+        }else{
+            this.showLoginForm();
+        }
     }
     async register(form)
     {
-        console.log(form);
         apiClient.Register(form.email.value, form.name.value, form.password.value)
         return false;
     }
     async logIn(form)
     {
-        console.log(form);
         apiClient.Login(form.email.value, form.password.value)
         return false;
+    }
+    async logout(){
+        dataStorage.unsetUser();
+        this.showLoginForm()
+    }
+    async showProfile(){
+        $("#profile").show();
+        $("#logsite").hide();
+    }
+    async showLoginForm(){
+        $("#logsite").show();
+        $("#profile").hide();
     }
 }

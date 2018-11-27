@@ -10,6 +10,9 @@ class MyDatastorage {
 		if(!user)return null;
 		return user.refreshToken;
 	}
+	unsetUser(){
+		localStorage.removeItem('user');
+	}
 }
 
 dataStorage = new MyDatastorage();
@@ -113,6 +116,10 @@ class Apiclient {
 	async getAllLaws() {
 		var alllaws = await this.GetRequest(this.SITE_URL + '/api/laws/all');
 		return alllaws;
+	}
+	async getUsersVotes() {
+		var userLaws = await this.GetRequest(this.SITE_URL + '/user/getmyvotes');
+		return userLaws;
 	}
 
 	async getLawsByPageAndStatus(num, status) {
