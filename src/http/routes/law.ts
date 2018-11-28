@@ -119,6 +119,18 @@ const disableVoteForLaw = async function (req: express.Request, res: express.Res
 
 }
 
+const search = async function (req: express.Request, res: express.Response, next: express.NextFunction) {
+  
+  try {
+    let query = req.params.query;
+    res.json(await globalLawService.search(query,req.params.num));
+  } catch (err) {
+    next(err);
+  }
+
+
+}
+
 export default function (router: express.Router) {
   router.get('/laws/all',isLoggedIn(accessLevels.USER), processErrors, getAllLaws);
   router.get('/laws/page/:num',isLoggedIn(accessLevels.GUEST), processErrors, getLawsByPage);
@@ -126,5 +138,6 @@ export default function (router: express.Router) {
   router.post("/laws/:id/vote/disable",isLoggedIn(accessLevels.USER),disableVoteForLaw);
   router.post("/laws/:id/vote/:upordown",isLoggedIn(accessLevels.USER),voteForLaw);
   router.get('/laws/:id',isLoggedIn(accessLevels.GUEST), processErrors, getLawById);
+  router.get('/laws/search/:query/page/:num',isLoggedIn(accessLevels.GUEST), processErrors, search);
   
 }

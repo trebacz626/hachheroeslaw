@@ -58,7 +58,11 @@ export function setModel(sequelize: Sequelize.Sequelize) {
     }
   }, {
       timestamps: false,
-      tableName: 'laws'
+      tableName: 'laws',
+      /*indexes: [
+        // add a FULLTEXT index
+        <Sequelize.DefineIndexOptions>{ type: 'FULLTEXT', name: 'text_idx', fields: ['name'] }
+      ]*/
     });
 
   model = Law;

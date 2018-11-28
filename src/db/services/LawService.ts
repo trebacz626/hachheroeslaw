@@ -70,7 +70,7 @@ export default class LawService extends DbService {
         }
       ]
     }
-    await LawModel.model.findAll(options);
+    return await LawModel.model.findAll(options);
   }
 
   async getLawsByPage(pageNum:number,userId?:number,status?:string){
@@ -113,6 +113,24 @@ export default class LawService extends DbService {
             })())
         })
         await Promise.all(requestsToresolve);
+  }
+
+  async search(query:string,pageNum?:number){
+    let options: Sequelize.FindOptions<ILawAttributes> = {
+      transaction: this.transaction,
+      offset:(pageNum-1)*60,
+      limit:60,
+      order:[
+        ['govId','DESC']
+      ],
+      where: {
+        [Sequelize.Op.and]: [
+          Sequelize.literal('MATCH (description) AGAINST('+query+')')
+      ]
+      }
+
+    }
+    return await LawModel.model.findAll(options);
   }
 
 
