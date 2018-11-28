@@ -3,8 +3,9 @@ var authController = new AuthController()
 
 const changepage = async function (pagename) {
     switch (pagename) {
+        case "regsite":
         case "logsite":
-            authController.start();
+            authController.start(pagename);
             break;
         case "mojsejm":
             await $("#content").html(mojsejm)
