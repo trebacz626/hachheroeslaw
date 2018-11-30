@@ -129,3 +129,10 @@ footer button:focus {
 .btn.btn-square {
     border-radius: 0;
   }
+
+reg{
+    position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+}
