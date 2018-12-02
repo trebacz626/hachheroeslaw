@@ -5,6 +5,8 @@ import { globalLawService } from '../../db/services/LawService';
 import { ILawInstance } from '../../db/model/Law';
 import { globalVoteService } from '../../db/services/VoteService';
 import { IVoteInstance } from '../../db/model/Vote';
+import { blockChainCLient } from '../../services/blockchain_client/blockchainClient';
+import { Vote } from '../../services/blockchain_client/vote';
 
 const getLawById = async function (req: express.Request, res: express.Response, next: express.NextFunction) {
   
@@ -69,7 +71,7 @@ const voteForLaw = async function (req: express.Request, res: express.Response, 
         law.votesDown+=1;
       }
       await law.save();
-      
+      await blockChainCLient.addVote(new Vote(req.user.name,17,law.govId,vote.isUp?1:-1));
       
     }else{
       if(vote.isUp!==isUp){
@@ -83,6 +85,7 @@ const voteForLaw = async function (req: express.Request, res: express.Response, 
           law.votesDown+=1;
         }
         await law.save();
+        await blockChainCLient.addVote(new Vote(req.user.name,17,law.govId,vote.isUp?1:-1));
       }
     }
     res.json({
