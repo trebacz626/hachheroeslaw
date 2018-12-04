@@ -2,6 +2,7 @@ import { ILawAttributes, LawStatus } from "../../db/model/Law";
 import { isNumber } from "util";
 import * as fs from 'fs'
 import * as cheerio from 'cheerio'
+import main from "../../configuration/main";
 
 class LawParser{
     constructor(){
@@ -30,6 +31,7 @@ class LawParser{
                 laws.push({
                     name:name,
                     pdfLink:pdfLink,
+                    cadence:main.law.cadence,
                     govId:govId,
                     status:status
                 })

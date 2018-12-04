@@ -11,9 +11,8 @@ export class BlockChainCLient{
         console.log("I am voting"+JSON.stringify(vote));
         return new Promise((resolve,reject)=>{
             var job =this.queue.create("addVote",{
-                pesel:vote.pesel,
-                cadency:vote.cadency,
-                lawGovId:vote.lawGovId,
+                userToken:vote.userToken,
+                lawHash:vote.lawHash,
                 status:vote.status
             }).priority('high').save();
 

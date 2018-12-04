@@ -1,10 +1,11 @@
 ﻿import express = require('express');
 import sequelizeManager from '../../db/model/sequelizeManager';
 import { Authenticator, PassportStatic } from 'passport';
-import { passportNames, isLoggedIn } from '../../utils/passport/auth';
+import { passportNames, isLoggedIn, accessLevels } from '../../utils/passport/auth';
 import { processErrors } from '../middlewares';
 import { globalLawService } from '../../db/services/LawService';
 import { globalVoteService } from '../../db/services/VoteService';
+import { blockChainCLient } from '../../services/blockchain_client/blockchainClient';
 const { validationResult } = require('express-validator/check');
 
 
@@ -13,6 +14,15 @@ const getAllVotes = async function (req: express.Request, res: express.Response,
   
   try {
     res.json(await globalVoteService.getAllVotes());
+  } catch (err) {
+    next(err);
+  }
+}
+
+const getPartOfChain = async function (req: express.Request, res: express.Response, next: express.NextFunction) {
+  
+  try {
+    res.json(await blockChainCLient.getPartOfChain(req.params.num));
   } catch (err) {
     next(err);
   }
@@ -32,6 +42,8 @@ export default function (router: express.Router) {
    * 
    * @apiUse userFromSessionDoesntexists
   */
- router.get('/votes/all', processErrors, getAllVotes);
+ //router.get('/votes/all', processErrors,isLoggedIn(accessLevels.) getAllVotes);
+  router.get('/votes/chain/:num', processErrors,isLoggedIn(accessLevels.GUEST), getPartOfChain);
+
   
 }

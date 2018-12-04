@@ -24,6 +24,7 @@ function passLawData(dbLaw,pageLaw){
     dbLaw.name=pageLaw.name;
 }
 
+
 export class Suplier{
     constructor(){
 
@@ -32,7 +33,10 @@ export class Suplier{
         await sequelizeManager.prepare();
         await sequelizeManager.connect();
         await this.updateLaws();
-        setInterval(this.updateLaws,1000*60*60*12);
+        var self=this;
+        setInterval(function(){
+            self.updateLaws();
+        },1000*60*5);
     }
     async updateLaws(){
         console.log("UPDATING LAWS");

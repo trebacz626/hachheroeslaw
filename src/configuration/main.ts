@@ -3,8 +3,8 @@
 let development = {
   killstagramDB: {
     name: "hackheroes",
-    userName: "hackheroesmaster",
-    password: "admin1",
+    userName: "root",
+    password: "",
     host: "localhost"
   },
   passport: {
@@ -20,6 +20,9 @@ let development = {
   },
   logger: {
     savePath:"logs.log"
+  },
+  law:{
+    cadence:8
   }
 };
 

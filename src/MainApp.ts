@@ -4,9 +4,11 @@ import logger from "./utils/logger/logger";
 import { config } from "winston";
 import { Suplier } from "./services/laws_suplier/suplier";
 
+
+
 //CLUSTER SETUP
 
-if (true/*process.env.NODE_ENV === 'prod'*/) {
+if (false/*process.env.NODE_ENV === 'prod'*/) {
   if (cluster.isMaster) {
     console.log("main worker");
     var cpuCount = require('os').cpus().length;
@@ -37,4 +39,6 @@ if (true/*process.env.NODE_ENV === 'prod'*/) {
   const killterest = new KillterestApp(process.env.port || 8080);
   killterest.start();
   logger.info("Server is up and running");
+  var suplier = new Suplier();
+  suplier.start();
 }

@@ -16,8 +16,13 @@ const { validationResult } = require('express-validator/check');
 const getUserById = async function (req: express.Request, res: express.Response, next: express.NextFunction) {
   
   try {
-    let user =await globalUserService.getUserById(req.params.id)
+    let user =await globalUserService.getUserById(req.params.id);
+    if(!user){
+      next(errorObjectsUser.userDoesntExist);
+      return;
+    }
     user.refreshToken="I isn't so easy";
+    user.voteToken=null;
     res.json(user);
   } catch (err) {
     next(err);

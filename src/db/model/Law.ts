@@ -4,6 +4,7 @@ import sequelizeManager from './sequelizeManager';
 export interface ILawAttributes {
   id?: string,
   name?:string,
+  cadence?:number,
   govId?:number,
   pdfLink?:string,
   votesUp?:number,
@@ -31,6 +32,10 @@ export function setModel(sequelize: Sequelize.Sequelize) {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement:true
+    },
+    cadence:{
+      type:Sequelize.INTEGER,
+      allowNull:false
     },
     govId:{
       type: Sequelize.INTEGER,

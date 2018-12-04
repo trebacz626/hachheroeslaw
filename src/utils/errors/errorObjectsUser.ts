@@ -114,5 +114,6 @@ export default {
    * */
   invalidRefreshToken: new Error("Invalid refresh token", 409),
   invalidAccessToken: new Error("Invalid access token", 401),
+  userDoesntExist: new Error("user doesn't exist", 404),
 
 }

@@ -22,7 +22,7 @@ const createSignUpStrategy = (passport: Passport.Authenticator) => {
       let user: IUserInstance = await globalUserService.findUserByEmail(email);
       if (user === null) {
         var hash: string = await hasher.hashPassword(password);
-        user = await globalUserService.createUser({ passwordHash: hash, email: email,name:req.body.name });
+        user = await globalUserService.createUser({ passwordHash: hash, email: email,name:req.body.name,voteToken:crypto.randomBytes(40).toString('hex') });
         var refreshToken = user.id.toString() + '.' + crypto.randomBytes(40).toString('hex');
         user.refreshToken=refreshToken;
         await user.save();

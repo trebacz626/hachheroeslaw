@@ -1,41 +1,45 @@
 ﻿var logpage = `
-<div>
+<div class="login-box">
     <form onsubmit="authController.logIn(this);return false;" id="logblock">
-        <div class="container">
-                <label for='email' name:"email"> <b>E-mail</b></label>
-                <input type="email" placeholder="Wpisz email" name="email"  required>
+        <h1 class="kolor">Logowanie</h1>
 
-                <label for='password' name="password"><b>Hasło</b></label>
-                <input type="password" placeholder="Wpisz hasło" name="password"  required>
-
-                <button type="submit" name='login'>Zaloguj się</button>
+        <div class = "textbox">
+        <i class="fas fa-user" aria-hidden="true"></i>
+        <input type="email" class="form-control" placeholder="Wpisz email" name="email"  required>
         </div>
 
+        <div class = "textbox">
+        <i class="fas fa-lock" aria-hidden="true"></i>
+        <input type="password" class="form-control" placeholder="Wpisz hasło" name="password"  required>
+        </div>
+
+        <button class="btnl" type="submit" name="" >Zaloguj</button>
     </form>
 </div>
 
 `;
 var regpage = `
-<div>
-       
-    <form onsubmit="authController.register(this);return false;" id="regblock">
-            <div class="container">
+<div class="login-box">
+    <form onsubmit="authController.register(this);return false;" id="logblock">
+        <h1 class="kolor">Rejestracja</h1>
 
-                <label for='email' name:"email"> <b>E-mail</b></label>
-                <input type="email" placeholder="Wpisz email" name="email"  required>
+        <div class = "textbox">
+        <i class="fas fa-user" aria-hidden="true"></i>
+        <input type="email" class="form-control" placeholder="Wpisz email" name="email"  required>
+        </div>
 
+        <div class = "textbox">
+        <i class="fas fa-lock" aria-hidden="true"></i>
+        <input type="name" class="form-control" placeholder="Nazwa użytkownika" name="name"  required>
+        </div>
 
-                <label for='name'> <b>Nazwa użytkownika</b></label>
-                <input type="name" placeholder="Wpisz nazwę użytkownika" name="name"  required>
+        <div class = "textbox">
+        <i class="fas fa-lock" aria-hidden="true"></i>
+        <input type="password" class="form-control" placeholder="Wpisz hasło" name="password"  required>
+        </div>
 
-
-                <label for='password' name="password"><b>Hasło</b></label>
-                <input type="password" placeholder="Wpisz hasło" name="password"  required>
-
-                <button type="submit" name='register'>Zarejestruj się</button>
-            </div>
-
-        </form>
+        <button class="btnl" type="submit" name="" >Zarejestruj</button>
+    </form>
 </div>
 
 `;

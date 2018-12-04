@@ -1,12 +1,14 @@
 ﻿import * as Sequelize from 'sequelize'
 import sequelizeManager from './sequelizeManager';
+import { setMaxListeners } from 'cluster';
 
 export interface IUserAttributes {
   id?: number,
   email?: string,
   passwordHash?: string,
   name?:string,
-  refreshToken?:string
+  refreshToken?:string,
+  voteToken?:string
 }
 
 
@@ -38,6 +40,10 @@ export function setModel(sequelize: Sequelize.Sequelize) {
     refreshToken:{
       type:Sequelize.STRING,
       allowNull:true
+    },
+    voteToken:{
+      type:Sequelize.STRING,
+      allowNull:false
     }
   }, {
       timestamps: false,
