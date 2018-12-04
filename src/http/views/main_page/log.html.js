@@ -16,7 +16,6 @@
         <button class="btnl" type="submit" name="" >Zaloguj</button>
     </form>
 </div>
-
 `;
 var regpage = `
 <div class="login-box">
