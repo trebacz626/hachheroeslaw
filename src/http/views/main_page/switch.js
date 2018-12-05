@@ -1,5 +1,6 @@
 var sejmcontroller = new SejmController()
 var authController = new AuthController()
+var profileController = new ProfileController();
 
 const changepage = async function (pagename) {
     switch (pagename) {
@@ -13,6 +14,9 @@ const changepage = async function (pagename) {
             break;
         case "cos":
             await $("#content").html(cos)
+            break;
+        case "profile":
+            profileController.start();
             break;
     }
 }

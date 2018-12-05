@@ -34,6 +34,7 @@ class Apiclient {
 			}
 		);
 		dataStorage.store(user);
+		
 	}
 	async Register(mail, name, password) {
 		console.log("register");
@@ -48,6 +49,7 @@ class Apiclient {
 		return rejestracja;
 	}
 	async GetRequest(url) {
+		try{
 		for (let i = 0; i < 3; i++) {
 			if(this.accessToken)var headers={
 				access_token: this.accessToken
@@ -76,8 +78,12 @@ class Apiclient {
 			}
 		}
 		return null;
+		}catch(err){
+			throw err;
+		}
 	}
 	async PostRequest(url, body) {
+		try{
 		for (let i = 0; i < 3; i++) {
 			if(this.accessToken)var headers={
 				access_token: this.accessToken
@@ -93,10 +99,10 @@ class Apiclient {
 					data:body
 				});
 			}catch(err){
-				var posting = err.status;
+				var posting = err;
 				console.log("error posting");
 			}	
-			if (posting == 401) {
+			if (posting.status===401) {
 				if (dataStorage.getRefreshToken() === null) {
 					return "Nie jesteś zalogowany/zalogowana"
 				}
@@ -107,10 +113,14 @@ class Apiclient {
 				)
 				this.accessToken = result.accessToken;
 			} else {
+				console.log("returning post")
 				return posting;
 			}
 		}
-		return null;
+		return posting;
+	}catch(err){
+		throw err;
+	}
 
 	}
 	async getAllLaws() {
@@ -118,7 +128,8 @@ class Apiclient {
 		return alllaws;
 	}
 	async getUsersVotes() {
-		var userLaws = await this.GetRequest(this.SITE_URL + '/user/getmyvotes');
+		var userLaws = await this.GetRequest(this.SITE_URL + '/api/user/getmyvotes');
+		console.log(userLaws);
 		return userLaws;
 	}
 

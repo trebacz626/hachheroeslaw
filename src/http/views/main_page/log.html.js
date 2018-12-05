@@ -14,9 +14,11 @@
         </div>
 
         <button class="btnl" type="submit" name="" >Zaloguj</button>
+        <span id="error" style="color:white">  </span>
     </form>
 </div>
 `;
+
 var regpage = `
 <div class="login-box">
     <form onsubmit="authController.register(this);return false;" id="logblock">
@@ -38,6 +40,7 @@ var regpage = `
         </div>
 
         <button class="btnl" type="submit" name="" >Zarejestruj</button>
+        <span id="error" style="color:white">  </span>
     </form>
 </div>
 
@@ -57,16 +60,60 @@ class AuthController {
     }
     async register(form)
     {
-        await apiClient.Register(form.email.value, form.name.value, form.password.value)
+        console.log("beforeReg");
+        try{
+        var wynik =await apiClient.Register(form.email.value, form.name.value, form.password.value);
+        }catch(err){
+            wynik=JSON.parse(err.responseText);
+        }
+        
+        if(wynik.error)
+        {
+            var blad = document.getElementById("error");
+            console.log(wynik.error);
+            blad.innerHTML=wynik.error.message;
+        }
+        else
+        {
+            this.pokaz();
+            changepage('mojsejm');
+        }
         return false;
     }
     async logIn(form)
     {
-        await apiClient.Login(form.email.value, form.password.value)
+        try{
+            var wynik;
+            wynik=await apiClient.Login(form.email.value, form.password.value)
+        }catch(err){
+            wynik=JSON.parse(err.responseText);
+        }
+        
+        if(wynik&&wynik.error)
+        {
+            var blad = document.getElementById("error");
+            console.log(wynik.error);
+            blad.innerHTML=wynik.error.message;
+        }
+        else
+        {
+            this.pokaz();
+            changepage('mojsejm');
+        }
         return false;
     }
     async logout(){
         dataStorage.unsetUser();
-        this.showLoginForm()
+        this.pokaz();
+        this.start("logsite");
+    }
+    async pokaz(){
+        if(dataStorage.getUser()){
+            $("#prelog").hide();
+            $('#postlog').show()
+        }else{
+            $("#prelog").show();
+            $('#postlog').hide()
+        }
     }
 }
